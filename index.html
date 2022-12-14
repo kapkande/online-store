@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/styles/index.css">
+</head>
+<div class="wpapper">
+    <header class="header">
+        <div class="logo"></div>
+        <div class="header__cost"></div>
+        <div class="header__basket"></div>
+    </header>
+    <main class="main">
+        <aside class="aside-bar">
+            <button>Reset Filters</button>
+            <div class="aside-bar__block"></div>
+            <div class="aside-bar__block"></div>
+            <div class="aside-bar__block"></div>
+            <div class="aside-bar__block"></div>
+        </aside>
+        <section>
+            <div class="main__info-block">
+                <select class="sort-block">
+                    <option value="sort-title" disabled="" selected="" class="sort-name">Sort options:</option>
+                    <option value="price-ASC">Sort by price ASC</option>
+                    <option value="price-DESC">Sort by price DESC</option>
+                    <option value="rating-ASC">Sort by rating ASC</option>
+                    <option value="rating-DESC">Sort by rating DESC</option>
+                    <option value="discount-ASC">Sort by discount ASC</option>
+                    <option value="discount-DESC">Sort by discount DESC</option>
+                </select>
+                <div class="stat"></div>
+                <div class="search-block">
+                    <input type="search" placeholder="Search product" class="search-bar">
+                </div>
+            </div>
+
+            <div class="main__product"></div>
+        </section>
+    </main>
+    <footer class="footer"></footer>
+</div>
+
+<body>
+    <script src="./assets/ts/index.js"></script>
+</body>
+
+</html>
