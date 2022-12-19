@@ -58,6 +58,6 @@ const basic = [{
     //     weight: '',
     //     TypeOfFeed: '',
     // }, 
-]
+];
 
 export default basic;

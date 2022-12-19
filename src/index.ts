@@ -1,5 +1,5 @@
 import './assets/styles/index.scss';
-import basicData from './basicData';
+import basic from './basicData';
 
 type elemAndNull = Element | null;
 const mainProduct: elemAndNull = document.querySelector('.main__product');
