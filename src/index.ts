@@ -1,3 +1,6 @@
+import './assets/styles/index.scss';
+import basicData from './basicData';
+
 type elemAndNull = Element | null;
 const mainProduct: elemAndNull = document.querySelector('.main__product');
 type stringAndUndefined = string | undefined

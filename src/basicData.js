@@ -59,3 +59,5 @@ const basic = [{
     //     TypeOfFeed: '',
     // }, 
 ]
+
+export default basic;
