@@ -48,7 +48,7 @@ function getOrder() {
 return newArray   
 }
 
-function showBlocks() {
+function showBlocks():void {
    let arrey:Array<object> = getOrder();
    arrey.forEach(element => {
     setBlock(element)
