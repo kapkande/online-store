@@ -1,4 +1,4 @@
-const basic = [{
+const basic:Array<object> = [{
         animal: 'cat',
         name: 'Purina Pro Plan',
         imageMain: 'https://avatars.mds.yandex.net/i?id=97884beb83f584cf3ebe9a1de9bd36af-5339089-images-thumbs&n=13',

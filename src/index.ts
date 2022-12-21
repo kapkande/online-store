@@ -5,8 +5,19 @@ type elemAndNull = Element | null;
 const mainProduct: elemAndNull = document.querySelector('.main__product');
 type stringAndUndefined = string | undefined
 type stringNull = string | null
-
-function setBlock(obj): void {
+interface IUser {
+    animal: 'dog',
+        name: ``,
+        imageMain: '',
+        imageOther: '',
+        description: ``,
+        cost: '',
+        brand: ``,
+        taste: '',
+        weight: '',
+        TypeOfFeed: '',
+}
+function setBlock(obj:object): void {
     let block = document.createElement("div"); //? какой тут тип
     block.classList.add('product__block');
 
