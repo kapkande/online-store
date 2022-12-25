@@ -17,7 +17,7 @@
         </header>
         <main class="main">
             <aside class="aside-bar">
-                <button>Reset Filters</button>
+                <button class="reset-sort-block">Reset Filters</button>
                 <div class="aside-bar__block"></div>
                 <div class="aside-bar__block"></div>
                 <div class="aside-bar__block"></div>
@@ -26,10 +26,11 @@
             <section>
                 <div class="main__info-block">
                     <select class="sort-block">
-                        <option selected="" value="price-ASC">Sort by price ASC</option>
+                        <option value="sort-title" disabled="" selected="">Sort options:</option>
+                        <option value="price-ASC">Sort by price ASC</option>
                         <option value="price-DESC">Sort by price DESC</option>
-                        <option value="rating-ASC">Sort by ASC</option>
-                        <option value="rating-DESC">Sort by DESC</option>
+                        <option value="ASC">Sort by ASC</option>
+                        <option value="DESC">Sort by DESC</option>
                         <!-- <option value="discount-ASC">Sort by discount ASC</option>
                         <option value="discount-DESC">Sort by discount DESC</option> -->
                     </select>

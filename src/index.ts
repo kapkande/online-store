@@ -2,22 +2,30 @@ import './assets/styles/index.scss';
 import basic from './basicData';
 
 type elemAndNull = Element | null;
-const mainProduct: elemAndNull = document.querySelector('.main__product');
+
 type stringAndUndefined = string | undefined
 type stringNull = string | null
-interface IUser {
-    animal: 'dog',
-        name: ``,
-        imageMain: '',
-        imageOther: '',
-        description: ``,
-        cost: '',
-        brand: ``,
-        taste: '',
-        weight: '',
-        TypeOfFeed: '',
+interface IBasic {
+    animal: string,
+    name: string,
+    imageMain: string,
+    imageOther: string,
+    description: string,
+    cost: string,
+    brand: string,
+    taste: string,
+    weight: string,
+    TypeOfFeed: string,
 }
-function setBlock(obj:object): void {
+
+const mainProduct: elemAndNull = document.querySelector('.main__product');
+const sortBlock: HTMLFormElement | null = document.querySelector('.sort-block');
+const productBlocks: NodeListOf<Element> = document.querySelectorAll('.product__block')
+const resetSortBlock: elemAndNull = document.querySelector('.reset-sort-block');
+const searchBar: HTMLFormElement | null = document.querySelector('.search-bar');
+
+
+function setBlock(obj: IBasic): void {
     let block = document.createElement("div"); //? какой тут тип
     block.classList.add('product__block');
 
@@ -50,23 +58,94 @@ function setBlock(obj:object): void {
     mainProduct?.appendChild(block);
 }
 
-function getOrder() {
-    const newArray:Array<object> = [];
-    for (let i = 0; i < basic.length;) {
-        let random = Math.floor(Math.random() * (basic.length - 1 + 1)) + 0;
-        if (!newArray.includes(basic[random])){
-            newArray.push(basic[random]);
+let basicCopy: Array<IBasic> = [];
+function getRandomOrder() {
+    const newArray: Array<IBasic> = [];
+    for (let i = 0; i < basicCopy.length;) {
+        let random = Math.floor(Math.random() * (basicCopy.length - 1 + 1)) + 0;
+        if (!newArray.includes(basicCopy[random])) {
+            newArray.push(basicCopy[random]);
             i++
         }
     }
-return newArray   
+    return newArray;
+}
+function getSortByABC() {
+    basicCopy.sort(function (a: IBasic, b: IBasic): number {
+        if (a.name > b.name) return 1;
+        if (a.name == b.name) return 0;
+        if (a.name < b.name) return -1;
+        return 0
+    });
+    return basicCopy;
+}
+function getSortByDESC() {
+    basicCopy.sort(function (a: IBasic, b: IBasic): number {
+        if (a.name < b.name) return 1;
+        if (a.name == b.name) return 0;
+        if (a.name > b.name) return -1;
+        return 0
+    });
+    return basicCopy;
+}
+function getSortByPriceASC() {
+    basicCopy.sort(function (a: IBasic, b: IBasic): number {
+        if (a.cost < b.cost) return 1;
+        if (a.cost == b.cost) return 0;
+        if (a.cost > b.cost) return -1;
+        return 0
+    });
+    return basicCopy;
+}
+function getSortByPriceDESC() {
+    basicCopy.sort(function (a: IBasic, b: IBasic): number {
+        if (a.cost > b.cost) return 1;
+        if (a.cost == b.cost) return 0;
+        if (a.cost < b.cost) return -1;
+        return 0
+    });
+    return basicCopy;
+}
+function deleteBlocks(): void {
+    const productBlocks: NodeListOf<Element> = document.querySelectorAll('.product__block')
+    productBlocks.forEach(element => {
+        element.remove();
+    });
 }
 
-function showBlocks():void {
-   let arrey:Array<object> = getOrder();
-   arrey.forEach(element => {
-    setBlock(element)
-   });
-
+function showBlocks(): void {
+    const productBlocks: NodeListOf<Element> = document.querySelectorAll('.product__block');
+    if (productBlocks.length != 0) { deleteBlocks() };
+    let arrey: Array<IBasic> = [];
+    if (sortBlock?.value == 'sort-title') { arrey = getRandomOrder() };
+    if (sortBlock?.value == 'price-ASC') { arrey = getSortByPriceASC() };
+    if (sortBlock?.value == 'price-DESC') { arrey = getSortByPriceDESC() };
+    if (sortBlock?.value == 'ASC') { arrey = getSortByABC() };
+    if (sortBlock?.value == 'DESC') { arrey = getSortByDESC() };
+    arrey.forEach(element => {
+        setBlock(element);
+    });
 }
-showBlocks()
+
+
+sortBlock?.addEventListener('change', showBlocks);
+
+function resetBlock() {
+    sortBlock!.value = 'sort-title';
+    searchBar!.value = '';
+    searchProduct();
+}
+resetSortBlock?.addEventListener('click', resetBlock);
+
+function searchProduct() {
+    basicCopy.length = 0
+    basic.forEach(element => {
+        if (element.name.toUpperCase().includes(searchBar?.value.trim().toUpperCase())) {
+            basicCopy.push(element)
+        }
+
+    });
+    showBlocks();
+};
+searchProduct();
+searchBar?.addEventListener('input', searchProduct);
