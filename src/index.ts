@@ -1,3 +1,4 @@
+import './assets/icons/basket.svg';
 import './assets/styles/index.scss';
 import basic from './basicData';
 
@@ -26,7 +27,7 @@ function setBlock(obj:object): void {
     img.classList.add('product__block__image');
     img.style.backgroundImage = `url('${obj.imageMain}')`;
     //create name
-    let nameItem: Element = document.createElement("div");
+    let nameItem: Element = document.createElement("h4");
     nameItem.classList.add('product__block__name-item');
     nameItem.textContent = `${obj.name}`;
     //create description
@@ -34,13 +35,13 @@ function setBlock(obj:object): void {
     descriptionItem.classList.add('product__block__description');
     descriptionItem.textContent = `${obj.description}`;
     //create cost
-    let costItem: Element = document.createElement("div");
-    costItem.classList.add('product__block__description');
-    costItem.textContent = `${obj.cost}`
+    let costItem: Element = document.createElement("h3");
+    costItem.classList.add('product__block__cost');
+    costItem.textContent = `$${obj.cost}`
     //create btm 
     let btm: Element = document.createElement("button");
-    btm.classList.add('product__block__button');
-    btm.textContent = 'add to'
+    btm.classList.add('product__block__button', 'button_base');
+    btm.textContent = 'ADD'
 
     block.appendChild(img);
     block.appendChild(nameItem);
