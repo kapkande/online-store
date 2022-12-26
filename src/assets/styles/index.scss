@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "vars";
+@import "normalize";
+@import "wrapper";
+@import "main";
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: $white;
+    color: $black;
+}
+
 .product__block {
     width: 230px;
     display: flex;
