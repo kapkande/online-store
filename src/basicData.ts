@@ -1,4 +1,18 @@
-const basic:Array<object> = [{
+interface IBasic {
+    animal: string,
+    name: string,
+    imageMain: string,
+    imageOther: string,
+    description: string,
+    cost: string,
+    brand: string,
+    taste: string,
+    weight: string,
+    TypeOfFeed: string,
+}
+
+
+const basic:Array<IBasic> = [{
         animal: 'cat',
         name: 'Purina Pro Plan',
         imageMain: 'https://avatars.mds.yandex.net/i?id=97884beb83f584cf3ebe9a1de9bd36af-5339089-images-thumbs&n=13',
@@ -61,3 +75,4 @@ const basic:Array<object> = [{
 ];
 
 export default basic;
+
