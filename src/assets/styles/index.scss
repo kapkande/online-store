@@ -2,25 +2,11 @@
 @import "vars";
 @import "normalize";
 @import "wrapper";
+@import "header";
 @import "main";
 
 body {
     font-family: 'Roboto', sans-serif;
     background-color: $white;
     color: $black;
-}
-
-.product__block {
-    width: 230px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.product__block__image {
-    width: 200px;
-    height: 200px;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
 }

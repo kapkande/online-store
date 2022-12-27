@@ -1,42 +1,117 @@
-.header {
-  height: 50px;
+.main {
+  display: flex;
+}
+
+.aside-bar {
+  width: 20%;
+  border-right: solid $silver 1.5px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button_base {
+  background-color: $red;
+  border: none;
+  color: $white;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-radius: 0.5em;
+}
+
+.button_reset {
+  width: 80%;
+}
+
+.main__content {
+  width: 80%;
+  padding: 20px;
+  display: grid;
+}
+
+.main__info-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-template-areas:
+    "search search sort";
   width: 100%;
+  padding-bottom: 30px;
+}
+
+.search-block {
+  width: 100%;
+  grid-area: search;
+}
+
+.search-bar {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5em 2em;
+  border-radius: 0.25em;
+  border: solid $silver 1.5px;
+  background-color: $white;
+  color: $black;
+}
+
+.sort-block {
+  padding-right: 2em;
+  padding-left: 2em;
+  border-radius: 0.25em;
+  border: solid $silver 1.5px;
+  background-color: $white;
+  color: $black;
+}
+
+.main__product {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.product__block {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+  border-radius: 0.25em;
+  border: solid $silver 1.5px;
+  padding-bottom: 10px;
+}
+
+.product__block__image {
+  width: 100%;
+  height: 200px;
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-top-left-radius: 0.25em;
+  border-top-right-radius: 0.25em;
   border-bottom: solid $silver 1.5px;
-  margin-bottom: 20px;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.product__block__name-item {
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
 }
 
-.header__logo {
+.product__block__description {
+  flex-grow: 1;
+  max-height: 6.8em;
+  padding-left: 1em;
+  padding-right: 1em;
+  overflow: hidden;
+}
+
+.product__block__cost {
   margin: 0;
 }
 
-.header__basket {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.header__basket_icon {
-  height: 100%;
-}
-
-.basket_main {
-  fill: $red;
-}
-
-.basket_handle {
-  fill: $black;
-}
-
-.header__cost, .header__items {
-  font-size: 1.5em;
-  margin: 0;
-  vertical-align: middle;
+.product__block__button {
+  box-sizing: border-box;
+  width: calc(100% - 20px);
 }

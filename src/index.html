@@ -15,64 +15,26 @@
                 <h1 class="header__logo">Online Store</h1>
             </div>
             <div class="header__basket">
-                <p class="header__cost">21$</p>
-                <svg class="header__basket_icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                    viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-                    <rect class="basket_handle" x="216.653" y="112.162" transform="matrix(0.4717 -0.8818 0.8818 0.4717 44.8017 331.0948)" width="164.098" height="31.996"/>
-                    <polygon class="basket_main" points="0,189.919 512,189.919 414.408,463.734 85.264,463.734 "/>
-                    <g>
-                    <rect x="146.083" y="243.434" style="fill:#FFFFFF;" width="10.592" height="166.781"/>
-                    <rect x="246.633" y="243.434" style="fill:#FFFFFF;" width="10.592" height="166.781"/>
-                    <rect x="277.62" y="243.434" style="fill:#FFFFFF;" width="21.184" height="166.781"/>
-                    <rect x="319.194" y="243.434" style="fill:#FFFFFF;" width="10.592" height="166.781"/>
-                    <rect x="355.465" y="243.434" style="fill:#FFFFFF;" width="10.592" height="166.781"/>
-                    <rect x="177.35" y="243.434" style="fill:#FFFFFF;" width="31.771" height="166.781"/>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                </svg>
-                <p class="header__items">2 products</p>
+                <p class="header__cost">$21</p>
+                <object type="image/svg+xml" data="basket.svg" width="50" height="50" >
+                </object>
+                <p class="header__items">2 product(s)</p>
             </div>
             
         </header>
         <main class="main">
             <aside class="aside-bar">
-                <button class="reset-sort-block">Reset Filters</button>
+                <button class="button_base button_reset">RESET FILTERS</button>
                 <div class="aside-bar__block"></div>
                 <div class="aside-bar__block"></div>
                 <div class="aside-bar__block"></div>
                 <div class="aside-bar__block"></div>
             </aside>
-            <section>
+            <section class="main__content">
                 <div class="main__info-block">
+                    <div class="search-block">
+                        <input type="search" placeholder="Search product" class="search-bar">
+                    </div>
                     <select class="sort-block">
                         <option value="sort-title" disabled="" selected="">Sort options:</option>
                         <option value="price-ASC">Sort by price ASC</option>
@@ -81,11 +43,7 @@
                         <option value="DESC">Sort by DESC</option>
                         <!-- <option value="discount-ASC">Sort by discount ASC</option>
                         <option value="discount-DESC">Sort by discount DESC</option> -->
-                    </select>
-                    <div class="stat"></div>
-                    <div class="search-block">
-                        <input type="search" placeholder="Search product" class="search-bar">
-                    </div>
+                    </select>               
                 </div>
                 <div class="main__product"></div>
             </section>
