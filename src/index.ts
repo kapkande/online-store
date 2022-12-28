@@ -150,3 +150,18 @@ function searchProduct() {
 };
 searchProduct();
 searchBar?.addEventListener('input', searchProduct);
+
+const rangeCostLine:Element| null = document.querySelector('.range-cost__line')
+
+//какой тип even
+const rangeCost = (even:any) => {
+    console.dir(rangeCostLine);
+    console.log(even.clientX);
+    const target = even.target;
+    // const leftCircle = ['range-cost__circle range-cost__circle-left'].includes(target.className)
+    // const rightCircle = ['range-cost__circle range-cost__circle-right'].includes(target.className)
+console.log();
+}
+
+rangeCostLine?.addEventListener('click', rangeCost);
+
