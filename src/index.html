@@ -25,26 +25,16 @@
         <main class="main">
             <aside class="aside-bar">
                 <button class="button_base button_reset">RESET FILTERS</button>
-                <div class="range-cost"> 
-                    <form class="range-cost__cost"> 
-                        <input class="range-input range-cost__min" type="text">
-                        <input class="range-input range-cost__max" type="text">
-                    </form> 
-                <div class="range-cost__line">
-                    <div class="ange-cost__bocks">
-                        <div class="range-cost__line-left"></div>
-                        <div class="range-cost__circle range-cost__circle-left"></div> 
-                    </div>
-                   
-                    <!-- <div class="range-cost__active-line"></div>  -->
-                    <!-- сделать див который будет тянутся за шариком -->
-                    <div class="ange-cost__bocks">
-                        <div class="range-cost__circle range-cost__circle-right"></div> 
-                        <div class="range-cost__line-right"></div>
-                    </div>
-                    
-                </div> 
-                </div>
+                <form class="range-cost">
+                        <div class="range-cost__inputs">
+                            <input class="range-input range-cost__min" type="text">
+                            <input class="range-input range-cost__max" type="text">
+                        </div>
+                        <span class="range-cost__line"></span>
+                        <span class="range-cost__incl"></span>
+                        <input class="range-cost__point" name="rangeOne" type="range">
+                        <input class="range-cost__point" name="rangeTwo" type="range">
+                </form> 
                 <div class="aside-bar__block"></div>
                 <div class="aside-bar__block"></div>
                 <div class="aside-bar__block"></div>

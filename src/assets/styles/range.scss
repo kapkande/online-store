@@ -1,46 +1,53 @@
 .range-cost {
-    margin: 5% 0 5% 0;
+    width: 80%;
+    position: relative;
 }
-.range-cost__cost {
+
+.range-cost__inputs {
     display: flex;
-    justify-content: space-between;
-        width: 80%;
-        margin: 0 auto;
+    justify-content: space-around;
 }
 
 .range-input {
-    width: 50px;
+    width: 40%;
     text-align: center;
 }
-.range-cost__line {
-    width: 200px;
-    height: 5px;
-    border-radius: 5px;
-    background-color: $red;
+
+.range-cost__line,
+.range-cost__incl {
+	width: 100%;
+	min-height: 5px;
+	border-radius: 5px;
     margin: 20px 0 20px 0;
-    display: flex;
-        align-items: center;
-        justify-content: space-between;
+	background: $silver;
+    position: absolute;
 }
-.range-cost__circle {
-    height: 11px;
-    width: 11px;
-        background-color: $red;
-        border-radius: 50%;
-    }
-   .range-cost__line-left {
-       background-color: $silver;
+
+.range-cost__incl {
+	background: $red;
+}
+
+.range-cost__point {
+    width: 100%;
+    -webkit-appearance: none;
+}
+
+.range-cost__point::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    position: relative;
+    height: 16px;
+    width: 16px;
+    background: $red;
+    border-radius: 50%;
+}
+
+.range-cost__point::-webkit-slider-runnable-track {
+    width: 100%;
     height: 5px;
-    width: 20px;
-    }
-    
-    .range-cost__line-right {
-    background-color: $silver;
-    height: 5px;
-    width: 20px;
-    }
-    
-    .ange-cost__bocks {
-        display: flex;
-        align-items: center;
+    border: none;
+    border-radius: 3px;
+    background: transparent;
+    position: absolute;
+    top: calc(100% - 22.5px);
 }
