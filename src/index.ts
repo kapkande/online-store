@@ -22,7 +22,7 @@ interface IBasic {
 const mainProduct: elemAndNull = document.querySelector('.main__product');
 const sortBlock: HTMLFormElement | null = document.querySelector('.sort-block');
 const productBlocks: NodeListOf<Element> = document.querySelectorAll('.product__block')
-const resetSortBlock: elemAndNull = document.querySelector('.reset-sort-block');
+const buttonReset: elemAndNull = document.querySelector('.button_reset');
 const searchBar: HTMLFormElement | null = document.querySelector('.search-bar');
 
 
@@ -136,7 +136,7 @@ function resetBlock() {
     searchBar!.value = '';
     searchProduct();
 }
-resetSortBlock?.addEventListener('click', resetBlock);
+buttonReset?.addEventListener('click', resetBlock);
 
 function searchProduct() {
     basicCopy.length = 0
@@ -150,3 +150,18 @@ function searchProduct() {
 };
 searchProduct();
 searchBar?.addEventListener('input', searchProduct);
+
+const rangeCostLine:Element| null = document.querySelector('.range-cost__line')
+
+//какой тип even
+const rangeCost = (even:any) => {
+    console.dir(rangeCostLine);
+    console.log(even.clientX);
+    const target = even.target;
+    // const leftCircle = ['range-cost__circle range-cost__circle-left'].includes(target.className)
+    // const rightCircle = ['range-cost__circle range-cost__circle-right'].includes(target.className)
+console.log();
+}
+
+rangeCostLine?.addEventListener('click', rangeCost);
+
