@@ -24,6 +24,14 @@ const sortBlock: HTMLFormElement | null = document.querySelector('.sort-block');
 const productBlocks: NodeListOf<Element> = document.querySelectorAll('.product__block')
 const buttonReset: elemAndNull = document.querySelector('.button_reset');
 const searchBar: HTMLFormElement | null = document.querySelector('.search-bar');
+const inputCostMin: HTMLInputElement | null = document.querySelector('.range-cost__min');
+const inputCostMax: HTMLInputElement | null = document.querySelector('.range-cost__max');
+let basicCopy: Array<IBasic> = [];
+const inputRange: NodeListOf<HTMLInputElement> = document.querySelectorAll('.range-cost__point')
+const rangeCost: Element | null = document.querySelector('.range-cost')
+const rangeCostInputs: Element | null = document.querySelector('.range-cost__inputs')
+const rangeCostLine: Element | null = document.querySelector('.range-cost__line')
+
 
 
 function setBlock(obj: IBasic): void {
@@ -59,17 +67,17 @@ function setBlock(obj: IBasic): void {
     mainProduct?.appendChild(block);
 }
 
-let basicCopy: Array<IBasic> = [];
+const globalArray: Array<IBasic> = [];
 function getRandomOrder() {
-    const newArray: Array<IBasic> = [];
+    if (globalArray.length > 0) {return globalArray}
     for (let i = 0; i < basicCopy.length;) {
         let random = Math.floor(Math.random() * (basicCopy.length - 1 + 1)) + 0;
-        if (!newArray.includes(basicCopy[random])) {
-            newArray.push(basicCopy[random]);
+        if (!globalArray.includes(basicCopy[random])) {
+            globalArray.push(basicCopy[random]);
             i++
         }
     }
-    return newArray;
+    return globalArray;
 }
 function getSortByABC() {
     basicCopy.sort(function (a: IBasic, b: IBasic): number {
@@ -116,14 +124,14 @@ function deleteBlocks(): void {
 
 function showBlocks(): void {
     const productBlocks: NodeListOf<Element> = document.querySelectorAll('.product__block');
-    if (productBlocks.length != 0) { deleteBlocks() };
+    if (productBlocks.length != 0 ) { deleteBlocks() };
     let arrey: Array<IBasic> = [];
     if (sortBlock?.value == 'sort-title') { arrey = getRandomOrder() };
     if (sortBlock?.value == 'price-ASC') { arrey = getSortByPriceASC() };
     if (sortBlock?.value == 'price-DESC') { arrey = getSortByPriceDESC() };
     if (sortBlock?.value == 'ASC') { arrey = getSortByABC() };
     if (sortBlock?.value == 'DESC') { arrey = getSortByDESC() };
-    arrey.forEach(element => {
+    sortWishRangeline(arrey).forEach(element => {
         setBlock(element);
     });
 }
@@ -134,6 +142,9 @@ sortBlock?.addEventListener('change', showBlocks);
 function resetBlock() {
     sortBlock!.value = 'sort-title';
     searchBar!.value = '';
+    inputCostMin!.value = '0.00'
+    inputCostMax!.value = `${getMaxPriseOnRange()}`
+    setInputRangeValue();
     searchProduct();
 }
 buttonReset?.addEventListener('click', resetBlock);
@@ -151,17 +162,45 @@ function searchProduct() {
 searchProduct();
 searchBar?.addEventListener('input', searchProduct);
 
-const rangeCostLine:Element| null = document.querySelector('.range-cost__line')
 
-//какой тип even
-const rangeCost = (even:any) => {
-    console.dir(rangeCostLine);
-    console.log(even.clientX);
-    const target = even.target;
-    // const leftCircle = ['range-cost__circle range-cost__circle-left'].includes(target.className)
-    // const rightCircle = ['range-cost__circle range-cost__circle-right'].includes(target.className)
-console.log();
+
+function getMaxPriseOnRange() {
+    const maxPrice: number = Number(getSortByPriceASC()[0].cost)
+    return maxPrice
 }
+inputCostMax!.value = `${getMaxPriseOnRange()}`
 
-rangeCostLine?.addEventListener('click', rangeCost);
+function setInputTextValue() {
+    const maxPrice: number = getMaxPriseOnRange();
+    let firstInputRange = (maxPrice * +inputRange[0].value / 100).toFixed(2);
+    let secondInputRange = (maxPrice * +inputRange[1].value / 100).toFixed(2);
 
+    if (firstInputRange > secondInputRange) {
+        inputCostMin!.value = secondInputRange
+        inputCostMax!.value = firstInputRange
+    } else if (firstInputRange < secondInputRange) {
+        inputCostMin!.value = firstInputRange
+        inputCostMax!.value = secondInputRange
+    }
+    showBlocks()
+}
+inputRange[0]?.addEventListener('input', setInputTextValue);
+inputRange[1]?.addEventListener('input', setInputTextValue);
+
+function setInputRangeValue() {
+    inputRange[0].value = `${Number(inputCostMin?.value) / getMaxPriseOnRange() * 100}`;
+    inputRange[1].value = `${Number(inputCostMax?.value) / getMaxPriseOnRange() * 100}`;
+    showBlocks()
+}
+rangeCostInputs?.addEventListener('input', setInputRangeValue);
+
+function sortWishRangeline(array: Array<IBasic>) {
+    let newArray: Array<IBasic> = []
+    array.forEach(element => {
+        if (+element.cost >= +inputCostMin!.value && +element.cost <= +inputCostMax!.value) {
+            newArray.push(element)
+        }
+    });
+
+    return newArray
+}
