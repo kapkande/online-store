@@ -1,16 +1,4 @@
-interface IBasic {
-    animal: string,
-    name: string,
-    imageMain: string,
-    imageOther: string,
-    description: string,
-    cost: string,
-    brand: string,
-    taste: string,
-    weight: string,
-    TypeOfFeed: string,
-}
-
+import IBasic from "./productInterface";
 
 const basic:Array<IBasic> = [{
         animal: 'cat',
