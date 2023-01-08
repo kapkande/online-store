@@ -4,6 +4,7 @@ import basketData from './assets/components/data/basketData';
 import basketInit from './assets/components/basketInit';
 import IBasicNew from './assets/components/data/productInterfaceNew';
 import newBasic from './assets/components/impBasicInit';
+import loadBasket from './assets/components/basketLoader';
 
 type elemAndNull = Element | null;
 
@@ -150,10 +151,14 @@ function searchProduct() {
 
     });
     showBlocks();
-};
+}
+
 searchProduct();
 searchBar?.addEventListener('input', searchProduct);
 
+document.querySelector('.header__basket_icon')?.addEventListener('click', (e) => {
+  loadBasket();
+});
 
 
 function getMaxPriseOnRange() {
