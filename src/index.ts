@@ -1,6 +1,8 @@
 import './assets/icons/basket.svg';
 import './assets/styles/index.scss';
-import basic from './basicData';
+import basic from './assets/components/data/basicData';
+import IBasic from "./assets/components/data/productInterface";
+
 
 type elemAndNull = Element | null;
 
@@ -19,9 +21,9 @@ const rangeCost: Element | null = document.querySelector('.range-cost')
 const rangeCostInputs: Element | null = document.querySelector('.range-cost__inputs')
 const rangeCostLine: Element | null = document.querySelector('.range-cost__line')
 
-let basicCopy: Array<IBasicNew> = [];
+const basicCopy: Array<IBasic> = [];
 
-function setBlock(obj: IBasicNew): void {
+function setBlock(obj: IBasic): void {
     let block = document.createElement("div"); //? какой тут тип
     block.classList.add('product__block');
 
@@ -45,7 +47,7 @@ function setBlock(obj: IBasicNew): void {
     let btn: Element = document.createElement("button");
     btn.classList.add('product__block__button', 'button_base');
     btn.textContent = 'ADD'
-    basketInit(btn, obj);
+    // basketInit(btn, obj);
 
     block.appendChild(img);
     block.appendChild(nameItem);
@@ -55,10 +57,9 @@ function setBlock(obj: IBasicNew): void {
     mainProduct?.appendChild(block);
 }
 
-const globalArray: Array<IBasic> = [];
+const arrayWithOrder: Array<number> = [];
 function getRandomOrder() {
     const globalArray: Array<IBasic> = [];
-
     if (arrayWithOrder.length > 0) {
         arrayWithOrder.forEach(i => {
             if (basicCopy[i]) {
@@ -69,7 +70,7 @@ function getRandomOrder() {
     }
 
     for (let i = 0; i < basicCopy.length;) {
-        let random = Math.floor(Math.random() * (basicCopy.length - 1 + 1)) + 0;
+        let random:number = Math.floor(Math.random() * (basicCopy.length - 1 + 1)) + 0;
         if (!globalArray.includes(basicCopy[random])) {
             globalArray.push(basicCopy[random]);
             arrayWithOrder.push(random)
@@ -80,7 +81,7 @@ function getRandomOrder() {
 
 }
 function getSortByABC() {
-    basicCopy.sort(function (a: IBasicNew, b: IBasicNew): number {
+    basicCopy.sort(function (a: IBasic, b: IBasic): number {
         if (a.name > b.name) return 1;
         if (a.name == b.name) return 0;
         if (a.name < b.name) return -1;
@@ -90,7 +91,7 @@ function getSortByABC() {
 }
 
 function getSortByDESC() {
-    basicCopy.sort(function (a: IBasicNew, b: IBasicNew): number {
+    basicCopy.sort(function (a: IBasic, b: IBasic): number {
         if (a.name < b.name) return 1;
         if (a.name == b.name) return 0;
         if (a.name > b.name) return -1;
@@ -99,7 +100,7 @@ function getSortByDESC() {
     return basicCopy;
 }
 function getSortByPriceASC() {
-    basicCopy.sort(function (a: IBasicNew, b: IBasicNew): number {
+    basicCopy.sort(function (a: IBasic, b: IBasic): number {
         if (a.cost < b.cost) return 1;
         if (a.cost == b.cost) return 0;
         if (a.cost > b.cost) return -1;
@@ -108,7 +109,7 @@ function getSortByPriceASC() {
     return basicCopy;
 }
 function getSortByPriceDESC() {
-    basicCopy.sort(function (a: IBasicNew, b: IBasicNew): number {
+    basicCopy.sort(function (a: IBasic, b: IBasic): number {
         if (a.cost > b.cost) return 1;
         if (a.cost == b.cost) return 0;
         if (a.cost < b.cost) return -1;
@@ -147,7 +148,6 @@ function resetBlock() {
     inputCostMax!.value = `${getMaxPriseOnRange()}`
     setInputRangeValue();
     searchProduct();
-    console.log(basketData);
 }
 buttonReset?.addEventListener('click', resetBlock);
 
@@ -200,8 +200,8 @@ function setInputRangeValue() {
 }
 rangeCostInputs?.addEventListener('input', setInputRangeValue);
 
-function sortWishRangeline(array: Array<IBasicNew>) {
-    let newArray: Array<IBasicNew> = []
+function sortWishRangeline(array: Array<IBasic>) {
+    let newArray: Array<IBasic> = []
     array.forEach(element => {
         if (+element.cost >= +inputCostMin!.value && +element.cost <= +inputCostMax!.value) {
             newArray.push(element)
