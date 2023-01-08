@@ -2,6 +2,9 @@ import './assets/icons/basket.svg';
 import './assets/styles/index.scss';
 import basic from './basicData';
 
+
+
+
 type elemAndNull = Element | null;
 
 type stringAndUndefined = string | undefined
@@ -67,17 +70,29 @@ function setBlock(obj: IBasic): void {
     mainProduct?.appendChild(block);
 }
 
-const globalArray: Array<IBasic> = [];
+const arrayWithOrder: Array<number> = [];
 function getRandomOrder() {
-    if (globalArray.length > 0) {return globalArray}
+    const globalArray: Array<IBasic> = [];
+
+    if (arrayWithOrder.length > 0) {
+        arrayWithOrder.forEach(i => {
+            if (basicCopy[i]) {
+                globalArray.push(basicCopy[i])
+            }
+        });
+        return globalArray
+    }
+
     for (let i = 0; i < basicCopy.length;) {
         let random = Math.floor(Math.random() * (basicCopy.length - 1 + 1)) + 0;
         if (!globalArray.includes(basicCopy[random])) {
             globalArray.push(basicCopy[random]);
+            arrayWithOrder.push(random)
             i++
         }
     }
     return globalArray;
+
 }
 function getSortByABC() {
     basicCopy.sort(function (a: IBasic, b: IBasic): number {
@@ -88,6 +103,7 @@ function getSortByABC() {
     });
     return basicCopy;
 }
+
 function getSortByDESC() {
     basicCopy.sort(function (a: IBasic, b: IBasic): number {
         if (a.name < b.name) return 1;
@@ -124,13 +140,14 @@ function deleteBlocks(): void {
 
 function showBlocks(): void {
     const productBlocks: NodeListOf<Element> = document.querySelectorAll('.product__block');
-    if (productBlocks.length != 0 ) { deleteBlocks() };
+    if (productBlocks.length != 0) { deleteBlocks() };
     let arrey: Array<IBasic> = [];
     if (sortBlock?.value == 'sort-title') { arrey = getRandomOrder() };
     if (sortBlock?.value == 'price-ASC') { arrey = getSortByPriceASC() };
     if (sortBlock?.value == 'price-DESC') { arrey = getSortByPriceDESC() };
     if (sortBlock?.value == 'ASC') { arrey = getSortByABC() };
     if (sortBlock?.value == 'DESC') { arrey = getSortByDESC() };
+    setQuery('sort=', sortBlock?.value)
     sortWishRangeline(arrey).forEach(element => {
         setBlock(element);
     });
@@ -150,16 +167,17 @@ function resetBlock() {
 buttonReset?.addEventListener('click', resetBlock);
 
 function searchProduct() {
-    basicCopy.length = 0
+    basicCopy.length = 0;
     basic.forEach(element => {
         if (element.name.toUpperCase().includes(searchBar?.value.trim().toUpperCase())) {
             basicCopy.push(element)
         }
-
     });
     showBlocks();
+    setQuery('search=', searchBar?.value)
 };
 searchProduct();
+
 searchBar?.addEventListener('input', searchProduct);
 
 
@@ -168,10 +186,11 @@ function getMaxPriseOnRange() {
     const maxPrice: number = Number(getSortByPriceASC()[0].cost)
     return maxPrice
 }
-inputCostMax!.value = `${getMaxPriseOnRange()}`
+
+searchProduct();
+const maxPrice: number = getMaxPriseOnRange();
 
 function setInputTextValue() {
-    const maxPrice: number = getMaxPriseOnRange();
     let firstInputRange = (maxPrice * +inputRange[0].value / 100).toFixed(2);
     let secondInputRange = (maxPrice * +inputRange[1].value / 100).toFixed(2);
 
@@ -183,6 +202,7 @@ function setInputTextValue() {
         inputCostMax!.value = secondInputRange
     }
     showBlocks()
+    setQuery('range=', `${firstInputRange},${secondInputRange}`)
 }
 inputRange[0]?.addEventListener('input', setInputTextValue);
 inputRange[1]?.addEventListener('input', setInputTextValue);
@@ -191,6 +211,7 @@ function setInputRangeValue() {
     inputRange[0].value = `${Number(inputCostMin?.value) / getMaxPriseOnRange() * 100}`;
     inputRange[1].value = `${Number(inputCostMax?.value) / getMaxPriseOnRange() * 100}`;
     showBlocks()
+    setQuery('range=', `${Number(inputCostMax?.value)},${Number(inputCostMax?.value)}`)
 }
 rangeCostInputs?.addEventListener('input', setInputRangeValue);
 
@@ -201,6 +222,118 @@ function sortWishRangeline(array: Array<IBasic>) {
             newArray.push(element)
         }
     });
-
     return newArray
+}
+
+function setPercentEncoding(parameter: Array<string>) {
+    let arr: Array<string> = [];
+    parameter.forEach(element => {
+        if (element == ',') {
+            arr.push('%2C')
+        } else if (element == '.') {
+            arr.push('%3A')
+        } else {
+            arr.push(element)
+        }
+
+        // console.log(element);
+    });
+    return arr.join('')
+}
+
+function setQuery(nameObj: string, ...parameters: string[]) {
+
+    const percentEncoding: string = setPercentEncoding(parameters.join('').split(''))
+
+    const linkWebsite = document.location.href.split('/')[3]
+    const arrayWithlink = linkWebsite.split('&')
+    // console.log(arrayWithlink);
+    const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname +
+        `${nameObj}${percentEncoding}`;
+
+    if (window.history.state == null) {
+        if (percentEncoding.toString().length == 0) { return }
+        window.history.pushState('', '', newurl);
+        return
+    }
+
+    if (String(arrayWithlink).includes(nameObj)) {
+        if (percentEncoding.toString().length == 0) { return }
+        let index: number
+        // console.log(arrayWithlink);
+        arrayWithlink.forEach((element, i) => {
+          if (element.split('=')[0] + '=' == nameObj) {
+               index = i
+            }
+        });
+        arrayWithlink.splice(index!, 1);
+        if (percentEncoding.toString().length != 0) {
+            arrayWithlink.push(`${nameObj}${percentEncoding}`)
+        }
+        window.history.replaceState({}, '', `${arrayWithlink.join('&')}`)
+        return
+    }
+
+    if (!String(arrayWithlink).includes(nameObj)) {
+        window.history.replaceState({}, '', `${arrayWithlink.join('&')}&${nameObj}${percentEncoding}`)
+    }
+}
+
+
+function loadQ() {
+    const linkWebsite = name(document.location.href.split('/')[3])
+    const arrayWithlink = linkWebsite.split('&')
+    let obj: any = {}
+    // console.log({arrayWithlink});
+    
+    function toObject(arrayWithlink: string[]) {
+        for (let i = 0; i < arrayWithlink.length; ++i) {
+            let key = arrayWithlink[i].split('=')[0]
+            let value = arrayWithlink[i].split('=')[1]
+            obj[key] = value;
+            console.log(value);
+        }
+    }
+    
+    toObject(arrayWithlink)
+    for (var key in obj) {
+        if (key == 'sort'){
+            sortBlock!.value = obj[key]
+            // showBlocks()
+            // console.log(obj[key]);
+        }
+        if (key == 'range'){
+            // console.log(obj[key]);
+        }
+    }
+
+    inputCostMax!.value = `${getMaxPriseOnRange()}`
+}
+// loadQ()
+
+function name(linkWebsite: string) {
+    const arr = []
+    for (let i = 0; i < linkWebsite.length; i++) {
+        if (linkWebsite[i] == '%' && linkWebsite[i + 1] == '2' && linkWebsite[i + 2] == 'C') {
+            arr.push(', ')
+            i += 2
+
+        } else if (linkWebsite[i] == '%' && linkWebsite[i + 1] == '3' && linkWebsite[i + 2] == 'A') {
+            arr.push('.')
+            i += 2
+
+        } else if (linkWebsite[i] == '%' && linkWebsite[i + 1] == '5' && linkWebsite[i + 2] == 'B') {
+            arr.push('[')
+            i += 2
+
+        } else if (linkWebsite[i] == '%' && linkWebsite[i + 1] == '5' && linkWebsite[i + 2] == 'D') {
+            arr.push(']')
+            i += 2
+
+        } else {
+            arr.push(linkWebsite[i])
+        }
+
+    }
+    return arr.join('')
 }
