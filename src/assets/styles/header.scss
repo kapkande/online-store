@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .header__logo {
@@ -25,6 +26,7 @@
 
 .header__basket_icon {
   height: 100%;
+  cursor: pointer;
 }
 
 .basket_main {
