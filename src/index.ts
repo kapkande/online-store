@@ -1,10 +1,10 @@
 import './assets/icons/basket.svg';
 import './assets/styles/index.scss';
 import basketData from './assets/components/data/basketData';
-import basketInit from './assets/components/basketInit';
+import basketInit from './assets/components/basket/basketInit';
 import IBasicNew from './assets/components/data/productInterfaceNew';
 import newBasic from './assets/components/impBasicInit';
-import loadBasket from './assets/components/basketLoader';
+import loadBasket from './assets/components/basket/basketLoader';
 
 type elemAndNull = Element | null;
 

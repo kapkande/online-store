@@ -4,6 +4,10 @@ function loadBasket() {
   const main = document.querySelector('.main');
   main?.classList.add('hidden');
 
+  if (document.querySelector('.basket')) {
+    document.querySelector('.basket')?.remove();
+  }
+
   const basket = document.createElement('div');
   basket.classList.add('basket');
 
