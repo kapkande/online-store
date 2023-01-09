@@ -5,14 +5,9 @@
 @import "header";
 @import "main";
 @import "range";
-@import "basket";
 
 body {
     font-family: 'Roboto', sans-serif;
     background-color: $white;
     color: $black;
-}
-
-.hidden {
-    display: none;
 }

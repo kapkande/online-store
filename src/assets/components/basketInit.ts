@@ -1,7 +1,7 @@
-import basketData from "../data/basketData";
-import IBasicNew from "../data/productInterfaceNew";
-import newBasic from "../impBasicInit";
-import updateHeader from "../updateHeader";
+import basketData from "./data/basketData";
+import IBasicNew from "./data/productInterfaceNew";
+import newBasic from "./impBasicInit";
+import updateHeader from "./updateHeader";
 
 function basketInit(element: Element, data: IBasicNew) {
   element.addEventListener('click', (e) => {
