@@ -23,7 +23,7 @@ const rangeCost: Element | null = document.querySelector('.range-cost')
 const rangeCostInputs: Element | null = document.querySelector('.range-cost__inputs')
 const rangeCostLine: Element | null = document.querySelector('.range-cost__line')
 
-let basicCopy: Array<IBasicNew> = [];
+const basicCopy: Array<IBasicNew> = [];
 
 function setBlock(obj: IBasicNew): void {
     let block = document.createElement("div"); //? какой тут тип
