@@ -1,7 +1,7 @@
 import generateBasket from "./generateBasket";
 
 function loadBasket() {
-  const main = document.querySelector('.main');
+  const main = document.querySelector('.main__defaultPage');
   main?.classList.add('hidden');
 
   if (document.querySelector('.basket')) {
