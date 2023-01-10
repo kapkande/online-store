@@ -5,6 +5,7 @@ import basketInit from './assets/components/basket/basketInit';
 import IBasicNew from './assets/components/data/productInterfaceNew';
 import newBasic from './assets/components/impBasicInit';
 import loadBasket from './assets/components/basket/basketLoader';
+import showMain from './assets/components/main/showMain';
 
 type elemAndNull = Element | null;
 
@@ -22,6 +23,7 @@ const inputRange: NodeListOf<HTMLInputElement> = document.querySelectorAll('.ran
 const rangeCost: Element | null = document.querySelector('.range-cost')
 const rangeCostInputs: Element | null = document.querySelector('.range-cost__inputs')
 const rangeCostLine: Element | null = document.querySelector('.range-cost__line')
+const logo = document.querySelector('logo');
 
 let basicCopy: Array<IBasicNew> = [];
 
@@ -156,10 +158,8 @@ function searchProduct() {
 searchProduct();
 searchBar?.addEventListener('input', searchProduct);
 
-document.querySelector('.header__basket_icon')?.addEventListener('click', (e) => {
-  loadBasket();
-});
-
+document.querySelector('.header__basket_icon')?.addEventListener('click', loadBasket);
+document.querySelector('.logo')?.addEventListener('click', showMain);
 
 function getMaxPriseOnRange() {
     const maxPrice: number = Number(getSortByPriceASC()[0].cost)
