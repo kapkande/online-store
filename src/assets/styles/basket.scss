@@ -1,0 +1,103 @@
+.basket {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+
+.basket__items {
+  padding-top: 20px;
+  border-right: solid $silver 1.5px;
+}
+
+.basket__item {
+  display: flex;
+  padding: 10px;
+  border-bottom: solid $silver 1.5px;
+  align-items: center;
+}
+
+.item__image {
+  min-width: 30%;
+  min-height: 100%;
+  max-height: 100px;
+  object-position: top;
+  object-fit: cover;
+  padding-right: 20px;
+}
+
+.item__name-item {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.item__costBlock {
+  display: flex;
+  flex-direction: column;
+  min-width: 25%;
+  align-items: center;
+}
+
+.item__cost {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.item__interaction {
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
+}
+
+.button_round {
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.item__total {
+  display: flex;
+  width: 80%;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0;
+  padding-top: 10px;
+}
+
+.item__amount,
+.item__price {
+  margin: 0;
+}
+
+.striked {
+  text-decoration-line: line-through;
+}
+
+.basket__checkout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.checkout__header {
+  margin-bottom: 10px;
+}
+
+.checkout__amount,
+.checkout__price,
+.checkout__newprice,
+.checkout__promo {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.checkout__buy {
+  width: 50%;
+}
+
+.checkout__promos_active {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+}
