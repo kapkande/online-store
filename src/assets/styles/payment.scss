@@ -1,0 +1,73 @@
+.payment {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $white;
+  border-radius: 5px;
+  border: solid $silver 1.5px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.overlay {
+  background-color: #000;
+  height: 100%;
+  left: 0;
+  opacity: 0.50;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.payment__title {
+  text-align: center;
+}
+
+.payment__input {
+  box-sizing: border-box;
+  width: 90%;
+  margin-bottom: 10px;
+  height: 25px;
+}
+
+.payment__card {
+  width: 90%;
+}
+
+.card__header {
+  text-align: center;
+}
+
+.card__icon {
+  height: 25px;
+}
+
+.card__number,
+.card__exp,
+.card__cvc {
+  height: 25px;
+  box-sizing: border-box;
+}
+
+.card__top,
+.card__bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.card__number,
+.card__cvc,
+.card__exp {
+  width: 100%;
+}
+
+.button_pay {
+  width: 90%;
+  margin-bottom: 10px;
+}

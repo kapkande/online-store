@@ -6,6 +6,7 @@
 @import "main";
 @import "range";
 @import "basket";
+@import "payment";
 
 body {
     font-family: 'Roboto', sans-serif;
@@ -15,4 +16,8 @@ body {
 
 .hidden {
     display: none;
+}
+
+input {
+    border: solid $silver 1.5px;
 }

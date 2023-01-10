@@ -1,5 +1,6 @@
 import './assets/icons/basket.svg';
 import './assets/styles/index.scss';
+import './assets/icons/card.png';
 import basketData from './assets/components/data/basketData';
 import basketInit from './assets/components/basket/basketInit';
 import IBasicNew from './assets/components/data/productInterfaceNew';
