@@ -5,6 +5,7 @@ import basketInit from './assets/components/basket/basketInit';
 import IBasicNew from './assets/components/data/productInterfaceNew';
 import newBasic from './assets/components/impBasicInit';
 import loadBasket from './assets/components/basket/basketLoader';
+import showMain from './assets/components/main/showMain';
 
 type elemAndNull = Element | null;
 
@@ -157,10 +158,8 @@ function searchProduct() {
 searchProduct();
 searchBar?.addEventListener('input', searchProduct);
 
-document.querySelector('.header__basket_icon')?.addEventListener('click', (e) => {
-  loadBasket();
-});
-
+document.querySelector('.header__basket_icon')?.addEventListener('click', loadBasket);
+document.querySelector('.logo')?.addEventListener('click', showMain);
 
 function getMaxPriseOnRange() {
     const maxPrice: number = Number(getSortByPriceASC()[0].cost)
