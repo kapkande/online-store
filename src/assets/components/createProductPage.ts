@@ -1,5 +1,5 @@
 import IBasicNew from "./data/productInterfaceNew";
-import basketInit from "./basketInit";
+import basketInit from "../components/basket/basketInit";
 import closeProductPage from "./closeProductPage";
 const logo:HTMLElement | null = document.querySelector('.logo')
 
