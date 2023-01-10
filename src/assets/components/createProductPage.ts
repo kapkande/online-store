@@ -1,13 +1,19 @@
 import IBasicNew from "./data/productInterfaceNew";
 import basketInit from "./basketInit";
+import closeProductPage from "./closeProductPage";
+const logo:HTMLElement | null = document.querySelector('.logo')
+
 function openProductPage(data: IBasicNew) {
   const rootPage: Element | null = document.querySelector('.root-page');
   rootPage?.classList.add('root-page-close');
   const productPageActive: Element | null = document.querySelector('.product-page');
   productPageActive?.classList.add('product-page-active');
-
-  
+ 
   createProductPage(data)
+
+  logo!.addEventListener('click', () => {
+    closeProductPage()
+  });
 }
 export default openProductPage;
 function createProductPage(data: IBasicNew) {

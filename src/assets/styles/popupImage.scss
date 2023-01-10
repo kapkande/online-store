@@ -1,0 +1,20 @@
+.iamgePopup {
+    width: 100%;
+    display: none;
+    height: 100%;
+    position: absolute;
+    top: 5%;
+    left: 0;
+}
+
+.iamgePopup-active {
+    display: flex;
+    align-items: center;
+}
+
+.iamgePopup__image {
+    max-width: 30%;
+    margin: 0 auto;
+    border: 4px solid $red;
+    border-radius: 5px;
+}
