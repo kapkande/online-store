@@ -101,3 +101,9 @@
   align-items: center;
   padding-bottom: 10px;
 }
+
+.basket__alert {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  text-align: center;
+}

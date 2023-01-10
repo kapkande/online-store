@@ -18,6 +18,7 @@ function openProductPage(data: IBasicNew) {
 export default openProductPage;
 function createProductPage(data: IBasicNew) {
   const productPageMainImage: HTMLImageElement | null = document.querySelector('.product-page__main-image')
+  console.log(productPageMainImage);
   productPageMainImage!.src = `${data.imageMain}`
 
   const productPageSecondesImages: HTMLImageElement | null = document.querySelector('.product-page__secondes-images')
