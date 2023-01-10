@@ -6,7 +6,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'src/index.ts'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: '[name].[contenthash].js',
     clean: true,
     assetModuleFilename: '[name][ext]',
   },
