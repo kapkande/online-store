@@ -21,7 +21,9 @@
     color: $black;
 }
 
-.product-page__images {}
+.product-page__images {
+    flex: 20%;
+}
 
 .product-page__main-image {
     width: 250px;
@@ -35,7 +37,9 @@
     height: 50px;
 }
 
-.product-page__information-block {}
+.product-page__information-block {
+    flex: 60%;
+}
 
 .product-page__brand {}
 
@@ -65,6 +69,7 @@
 .product-page__bay-block {
     display: flex;
     flex-direction: column;
+    flex: 10%;
 }
 
 .product-page__cart {}

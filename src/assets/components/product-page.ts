@@ -7,6 +7,10 @@ const iamgePopupImage: HTMLImageElement | null = document.querySelector('.iamgeP
 const mainImage:HTMLImageElement | null = document.querySelector('.product-page__main-image')
 function onMainProduct(element: Element, data: IBasicNew) {
   element.addEventListener('click', (e) => {
+    if (!(e!.target instanceof HTMLElement)) { return; }
+    const target: HTMLElement  = e.target;
+    const isBuyBtm = ['product__block__button button_base'].includes(target.className);
+    if(isBuyBtm) {return}
     openProductPage(data)
   });
 }
