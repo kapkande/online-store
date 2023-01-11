@@ -1,5 +1,11 @@
-/* eslint-disable no-useless-escape */
+import closePayment from "./closePayment";
+import paymentComplete from "./paymentComplete";
+
 function generatePayment() {
+  const overlay = document.querySelector('.overlay');
+  overlay?.classList.remove('hidden');
+  overlay?.addEventListener('click', closePayment);
+
   const payment = document.createElement('div');
   payment.classList.add('payment');
 
@@ -13,7 +19,7 @@ function generatePayment() {
   name.placeholder = 'Name + Surname';
   name.classList.add('payment__input', 'payment__name');
   name.required = true;
-  name.pattern = '\w{3,}\s\w{3,}';
+  name.pattern = "\\w{3,}\\s\\w{3,}";
   payment.appendChild(name);
 
   const phone = document.createElement('input');
@@ -21,6 +27,7 @@ function generatePayment() {
   phone.placeholder = 'Phone number';
   phone.classList.add('payment__input', 'payment__phone');
   phone.required = true;
+  phone.pattern = "\\+\\d{9,}";
   payment.appendChild(phone)
 
   const address = document.createElement('input');
@@ -28,6 +35,7 @@ function generatePayment() {
   address.placeholder = 'Delivery address';
   address.classList.add('payment__input', 'payment__address');
   address.required = true;
+  address.pattern = '\\w{5,}(\\s\\w{5,}){2,}';
   payment.appendChild(address);
 
   const email = document.createElement('input');
@@ -56,10 +64,30 @@ function generatePayment() {
   cardTop.appendChild(cardIcon);
 
   const cardnum = document.createElement('input');
-  cardnum.type = 'tel';
+  cardnum.type = 'text';
   cardnum.placeholder = 'Card number';
-  cardnum.classList.add('card__number');
+  cardnum.classList.add('payment__input', 'card__number');
   cardnum.required = true;
+  cardnum.maxLength = 16;
+  cardnum.oninput = () => {cardnum.value = cardnum.value.replace(/[^0-9]/g, '')};
+  cardnum.pattern = '\\d{16}';
+  cardnum.addEventListener('change', () => {
+    switch (cardnum.value[0]) {
+      case '2': {
+        cardIcon.src = 'mir.png';
+        break;
+      }
+      case '4': {
+        cardIcon.src = 'mastercard.png';
+        break;
+      }
+      case '5': {
+        cardIcon.src = 'visa.png';
+        break;
+      }
+      default: cardIcon.src = 'card.png';
+    }
+  });
   cardTop.appendChild(cardnum);
 
   const cardBottom = document.createElement('div');
@@ -69,20 +97,31 @@ function generatePayment() {
   const exp = document.createElement('input');
   exp.type = 'tel';
   exp.placeholder = 'MM/YY';
-  exp.classList.add('card__exp');
+  exp.classList.add('payment__input', 'card__exp');
   exp.required = true;
+  exp.pattern = '^(0[1-9]|1[0-2])\\/?([0-9]{2})'
+  exp.maxLength = 5;
+  exp.addEventListener('keypress', () => {
+    if (exp.value.length == 2) {
+      exp.value += '/';
+    }
+  });
   cardBottom.appendChild(exp);
 
   const cvc = document.createElement('input');
   cvc.type = 'tel';
   cvc.placeholder = 'CVC';
-  cvc.classList.add('card__cvc');
+  cvc.classList.add('payment__input', 'card__cvc');
   cvc.required = true;
+  cvc.maxLength = 3;
+  cvc.oninput = () => {cvc.value = cvc.value.replace(/[^0-9]/g, '')};
+  cvc.pattern = '\\d{3}';
   cardBottom.appendChild(cvc);
 
   const pay = document.createElement('button');
   pay.classList.add('button_base', 'button_pay');
   pay.innerText = 'Pay now';
+  pay.addEventListener('click', paymentComplete);
   payment.appendChild(pay);
 
   document.querySelector('.basket')?.after(payment);

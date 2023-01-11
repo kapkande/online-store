@@ -21,6 +21,7 @@
   top: 0;
   width: 100%;
   z-index: 1;
+  transition: all 0.3s ease;
 }
 
 .payment__title {
@@ -32,6 +33,18 @@
   width: 90%;
   margin-bottom: 10px;
   height: 25px;
+}
+
+.payment__input:invalid {
+  border: solid $red 1.5px;
+}
+
+.payment__input:placeholder-shown {
+  border: solid #a8a4ac 1.5px;
+}
+
+.payment__input:valid {
+  border: solid green 1.5px;
 }
 
 .payment__card {
@@ -70,4 +83,19 @@
 .button_pay {
   width: 90%;
   margin-bottom: 10px;
+}
+
+.valid {
+  cursor: default;
+  background-color: green;
+}
+
+.invalid {
+  cursor: default;
+  background-color: #F6282B;
+}
+
+.unknown {
+  cursor: default;
+  background-color: $silver;
 }

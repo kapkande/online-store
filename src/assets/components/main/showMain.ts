@@ -6,6 +6,10 @@ function showMain() {
   if (document.querySelector('.basket')) {
     document.querySelector('.basket')?.remove();
   }
+
+  if (document.querySelector('.payment')) {
+    document.querySelector('.payment')?.remove();
+  }
 }
 
 export default showMain;
