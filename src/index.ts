@@ -1,5 +1,10 @@
 import './assets/icons/basket.svg';
 import './assets/styles/index.scss';
+import './assets/icons/card.png';
+import './assets/icons/visa.png';
+import './assets/icons/mir.png';
+import './assets/icons/mastercard.png';
+
 
 import onMainProduct from "./assets/components/product-page";
 import basketData from './assets/components/data/basketData';

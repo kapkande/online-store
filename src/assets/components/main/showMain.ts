@@ -12,6 +12,10 @@ function showMain() {
   if (!( productPage?.classList.contains('hidden'))) {
     productPage?.classList.add('hidden')
   }
+  
+  if (document.querySelector('.payment')) {
+    document.querySelector('.payment')?.remove();
   }
+}
 
 export default showMain;

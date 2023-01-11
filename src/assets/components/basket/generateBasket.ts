@@ -1,6 +1,7 @@
 import basketData from "../data/basketData";
 import newBasic from "../impBasicInit";
 import generateBasketItem from "./generateBasketItem";
+import generatePayment from "../payment/generatePayment";
 
 function generateBasket() {
   const basketItems = document.querySelector('.basket__items');
@@ -63,6 +64,8 @@ function generateBasket() {
   const buy = document.createElement('button');
   buy.classList.add('button_base', 'checkout__buy');
   buy.innerText = 'Buy now';
+  buy.addEventListener('click', generatePayment);
+
   basketTotal?.appendChild(buy);
 }
 
