@@ -33,7 +33,7 @@ productpageImages?.addEventListener('click', onPoductImages);
 export default onMainProduct;
 
 function openMainImg(target: HTMLImageElement) {
-  iamgePopup?.classList.add('iamgePopup-active');
+  iamgePopup?.classList.remove('hidden');
   iamgePopupImage!.src = `${target.src}`;
   
   
@@ -42,7 +42,7 @@ function openMainImg(target: HTMLImageElement) {
     const target: HTMLElement = e.target;
     const popupimage = ['iamgePopup__image'].includes(target.className);
     if (popupimage){return}
-    iamgePopup?.classList.remove('iamgePopup-active');
+    iamgePopup?.classList.add('hidden');
   });
 
 }

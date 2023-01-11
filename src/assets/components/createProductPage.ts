@@ -1,19 +1,16 @@
 import IBasicNew from "./data/productInterfaceNew";
 import basketInit from "../components/basket/basketInit";
-import closeProductPage from "./closeProductPage";
-const logo:HTMLElement | null = document.querySelector('.logo')
 
+const logo: HTMLElement | null = document.querySelector('.logo')
+const productPageMain: HTMLElement | null = document.querySelector('.product-page__main')
 function openProductPage(data: IBasicNew) {
   const rootPage: Element | null = document.querySelector('.root-page');
-  rootPage?.classList.add('root-page-close');
+  rootPage?.classList.add('hidden');
   const productPageActive: Element | null = document.querySelector('.product-page');
-  productPageActive?.classList.add('product-page-active');
- 
+  productPageActive?.classList.remove('hidden');
+
   createProductPage(data)
 
-  logo!.addEventListener('click', () => {
-    closeProductPage()
-  });
 }
 export default openProductPage;
 function createProductPage(data: IBasicNew) {
@@ -22,13 +19,14 @@ function createProductPage(data: IBasicNew) {
   productPageMainImage!.src = `${data.imageMain}`
 
   const productPageSecondesImages: HTMLImageElement | null = document.querySelector('.product-page__secondes-images')
- 
+
+
   const imageOther = document.querySelectorAll('.imageOther')
   for (let i = 0; i < data.imageOther.length; i++) {
-    if (imageOther){
+    if (imageOther) {
       imageOther.forEach(element => {
         element.remove();
-    });
+      });
     }
     let img = document.createElement("img");
     img.classList.add('imageOther')
@@ -63,18 +61,37 @@ function createProductPage(data: IBasicNew) {
   childrenTypeOfFeed![0].textContent = `Type Of Feed`;
   childrenTypeOfFeed![1].textContent = data.TypeOfFeed;
 
-  const productPpageCost = document.querySelector('.product-page__cost')
-  const childrenCost = productPpageCost?.children;
-  childrenCost![0].textContent = `Cost`;
-  childrenCost![1].textContent = data.cost;
-
   const productPpageAnimal = document.querySelector('.product-page__animal')
   const childrenAnimal = productPpageAnimal?.children;
   childrenAnimal![0].textContent = `Animal`;
   childrenAnimal![1].textContent = data.animal;
 
-const productPageCart:Element| null = document.querySelector('.product-page__cart')
-  basketInit(productPageCart!, data)
+
+  const bayBlock: Element = document.createElement('div');
+  const div: Element = document.createElement("div");
+  const addToCartBTM: Element = document.createElement("button");
+  const buyNowBTM: Element = document.createElement("button");
+ 
+  const productPageBayBlock: HTMLImageElement | null = document.querySelector('.product-page__bay-block')
+
+  if (productPageBayBlock) {
+    productPageBayBlock.remove()
+    
+  }
+  bayBlock.classList.add('product-page__bay-block');
+  div.classList.add('product-page__cost');
+  addToCartBTM.classList.add('button_base', 'product-page__cart');
+  buyNowBTM.classList.add('button_base', 'product-page__bay');
+
+  div.textContent = data.cost + '$';
+  addToCartBTM.textContent = 'ADD TO CART';
+  buyNowBTM.textContent = 'BUY NOW';
+
+  bayBlock?.appendChild(div);
+  bayBlock?.appendChild(addToCartBTM);
+  bayBlock?.appendChild(buyNowBTM);
+  productPageMain!.appendChild(bayBlock);
+  basketInit(addToCartBTM!, data);
 }
 // function name(element: Element | null, data: IBasicNew) {
 //   const children = element?.children

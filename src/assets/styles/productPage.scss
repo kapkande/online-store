@@ -1,8 +1,4 @@
 .product-page {
-    display: none;
-}
-
-.product-page-active {
     display: block;
 }
 
@@ -62,7 +58,14 @@
 
 .product-page__TypeOfFeed {}
 
-.product-page__cost {}
+.product-page__cost {
+    font-size: 24px;
+    text-align: center;
+    background-color: $red;
+    border-radius: 5px;
+    color: $white;
+    border: 2px solid $white;
+}
 
 .product-page__animal {}
 
@@ -70,6 +73,7 @@
     display: flex;
     flex-direction: column;
     flex: 10%;
+    gap: 5px;
 }
 
 .product-page__cart {}
