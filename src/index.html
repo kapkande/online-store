@@ -19,10 +19,9 @@
                 <img src="basket.svg" class="header__basket_icon" width="50" height="50">
                 <p class="header__items">0 product(s)</p>
             </div>
-
         </header>
         <main class="main">
-            <div class="main__defaultPage">
+            <div class="root-page">
                 <aside class="aside-bar">
                     <button class="button_base button_reset">RESET FILTERS</button>
                     <form class="range-cost">
@@ -58,8 +57,47 @@
                     <div class="main__product"></div>
                 </section>
             </div>
+            <div class="product-page hidden">
+                <div class="product-page__header"></div>
+                <div class="product-page__main">
+                    <div class="product-page__title"></div>
+                    <div class="product-page__images">
+                        <img class="product-page__main-image" alt="main-image">
+                        <div class="product-page__secondes-images"></div>
+                    </div>
+                    <div class="product-page__information-block">
+                        <div class="product-page__brand">
+                            <div class="product-page__subtitle"></div>
+                            <div class="product-page__text"></div>
+                        </div>
+                        <div class="product-page__description">
+                            <div class="product-page__subtitle"></div>
+                            <div class="product-page__text"></div>
+                        </div>
+                        <div class="product-page__taste">
+                            <div class="product-page__subtitle"></div>
+                            <div class="product-page__text"></div>
+                        </div>
+                        <div class="product-page__weight">
+                            <div class="product-page__subtitle"></div>
+                            <div class="product-page__text"></div>
+                        </div>
+                        <div class="product-page__TypeOfFeed">
+                            <div class="product-page__subtitle"></div>
+                            <div class="product-page__text"></div>
+                        </div>
+                        <div class="product-page__animal">
+                            <div class="product-page__subtitle"></div>
+                            <div class="product-page__text"></div>
+                        </div>
+                    </div>
+                   </div>
+            </div>
         </main>
         <footer class="footer"></footer>
+        <div class="iamgePopup hidden">
+            <img class="iamgePopup__image" src="" alt="popup-image">
+        </div>
     </div>
     <div class="overlay hidden"></div>
 </body>
