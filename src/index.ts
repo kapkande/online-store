@@ -4,7 +4,7 @@ import './assets/icons/card.png';
 import './assets/icons/visa.png';
 import './assets/icons/mir.png';
 import './assets/icons/mastercard.png';
-
+import './assets/icons/rs_school_js.svg';
 
 import onMainProduct from "./assets/components/product-page";
 import basketData from './assets/components/data/basketData';
