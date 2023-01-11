@@ -3,7 +3,7 @@ interface IBasic {
   animal: string,
   name: string,
   imageMain: string,
-  imageOther: string,
+  imageOther: string[],
   description: string,
   cost: string,
   brand: string,
