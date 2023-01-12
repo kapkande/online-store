@@ -38,7 +38,10 @@
 }
 
 .header__cost, .header__items {
+  width: 150px;
   font-size: 1.5em;
   margin: 0;
   vertical-align: middle;
+  text-align: center;
+  font-weight: 550;
 }
