@@ -1,0 +1,81 @@
+.product-page {
+    display: block;
+}
+
+.product-page__header {}
+
+.product-page__main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+.product-page__title {
+    text-align: center;
+    font-size: 20px;
+    flex: 0 0 100%;
+    color: $black;
+}
+
+.product-page__images {
+    flex: 20%;
+}
+
+.product-page__main-image {
+    width: 250px;
+    height: 250px;
+}
+
+.product-page__secondes-images {}
+
+.imageOther {
+    width: 50px;
+    height: 50px;
+}
+
+.product-page__information-block {
+    flex: 60%;
+}
+
+.product-page__brand {}
+
+.product-page__subtitle {
+    font-size: 18px;
+    background-color: $red;
+    color: $white;
+}
+
+.product-page__text {
+    background-color: $silver;
+    color: $black;
+}
+
+.product-page__description {}
+
+.product-page__taste {}
+
+.product-page__weight {}
+
+.product-page__TypeOfFeed {}
+
+.product-page__cost {
+    font-size: 24px;
+    text-align: center;
+    background-color: $red;
+    border-radius: 5px;
+    color: $white;
+    border: 2px solid $white;
+}
+
+.product-page__animal {}
+
+.product-page__bay-block {
+    display: flex;
+    flex-direction: column;
+    flex: 10%;
+    gap: 5px;
+}
+
+.product-page__cart {}
+
+.product-page__bay {}

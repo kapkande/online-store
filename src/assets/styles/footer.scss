@@ -1,0 +1,28 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: solid $silver 1.5px;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.footer__authors {
+  display: flex;
+  flex-direction: column;
+  color: $red;
+  gap: 5px;
+}
+
+.footer__link {
+  text-decoration: none;
+  color: $red;
+}
+
+.footer__rs {
+  height: 100%;
+}
+
+.footer__logo {
+  width: 100px;
+}

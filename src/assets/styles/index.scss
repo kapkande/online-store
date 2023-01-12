@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "vars";
+@import "normalize";
+@import "wrapper";
+@import "header";
+@import "main";
+@import "range";
+@import "productPage";
+@import "popupImage";
+@import "basket";
+@import "payment";
+@import "footer";
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: $white;
+    color: $black;
+}
+
+.hidden {
+    display: none;
+}
+
+input {
+    border: solid $silver 1.5px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
