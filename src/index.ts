@@ -113,9 +113,9 @@ function getSortByDESC() {
 }
 function getSortByPriceASC() {
     basicCopy.sort(function (a: IBasicNew, b: IBasicNew): number {
-        if (a.cost < b.cost) return 1;
-        if (a.cost == b.cost) return 0;
-        if (a.cost > b.cost) return -1;
+    if (Number(a.cost) < Number(b.cost)) return 1;
+        if (Number(a.cost) == Number(b.cost)) return 0;
+        if (Number(a.cost) > Number(b.cost)) return -1;
         return 0
     });
     return basicCopy;
@@ -291,7 +291,7 @@ function loadQ() {
             let key = arrayWithlink[i].split('=')[0]
             let value = arrayWithlink[i].split('=')[1]
             obj[key] = value;
-            console.log(value);
+            // console.log(value);
         }
     }
     
