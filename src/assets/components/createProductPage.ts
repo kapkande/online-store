@@ -1,21 +1,27 @@
 import IBasicNew from "./data/productInterfaceNew";
 import basketInit from "../components/basket/basketInit";
 
-const logo: HTMLElement | null = document.querySelector('.logo')
+
 const productPageMain: HTMLElement | null = document.querySelector('.product-page__main')
 function openProductPage(data: IBasicNew) {
   const rootPage: Element | null = document.querySelector('.root-page');
   rootPage?.classList.add('hidden');
   const productPageActive: Element | null = document.querySelector('.product-page');
   productPageActive?.classList.remove('hidden');
-
   createProductPage(data)
+  // addLink(data.id)
 
 }
+
+function addLink(link:number) {
+  const allLinck = document.location.href.split('/')
+  const linkWebsite = allLinck[allLinck.length-1];
+  window.history.replaceState({}, '', `${link}/${linkWebsite}`)
+}
+
 export default openProductPage;
 function createProductPage(data: IBasicNew) {
   const productPageMainImage: HTMLImageElement | null = document.querySelector('.product-page__main-image')
-  console.log(productPageMainImage);
   productPageMainImage!.src = `${data.imageMain}`
 
   const productPageSecondesImages: HTMLImageElement | null = document.querySelector('.product-page__secondes-images')
