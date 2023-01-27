@@ -23,10 +23,137 @@ const basicCopy: Array<IBasicNew> = [];
 
 
 
+const nav = `<a href="/">Home</a> | 
+<a href="/about">About</a> | 
+<a href="/contact">Contact</a>`;
+const routes:any = {
+    "/": `<h1>Home</h1>${nav}<p>Welcome home!</p>`,
+    "/about": `<h1>About</h1>${nav}<p>This is a tiny SPA</p>`,
+};
+const render:any = (path:any) => {
+document.querySelector(".main")!.innerHTML = routes[path] || `<h1>404</h1>${nav}`;
+    document.querySelectorAll('[href^="/"]').forEach(el =>
+        el.addEventListener("click", evt => {
+            if (!( evt!.target instanceof HTMLLinkElement)) { return; }
+            evt.preventDefault();
+            const { pathname: path } = new URL(evt.target!.href);
+            window.history.pushState({ path }, path, path);
+            render(path);
+        })
+    );
+};
+window.addEventListener("popstate", e =>
+    render(new URL(window.location.href).pathname)
+);
+render("/");
+
+class Router {
+    routes:any = [];
+  
+    mode:any = null;
+  
+    root:any = '/';
+  
+    constructor(options:any) {
+      this.mode = window.history.pushState ? 'history' : 'hash';
+      if (options.mode) this.mode = options.mode;
+      if (options.root) this.root = options.root;
+      this.listen();
+    }
+  
+    add = (path:any, cb:any) => {
+      this.routes.push({ path, cb });
+      return this;
+    };
+  
+    remove = (path:any) => {
+      for (let i = 0; i < this.routes.length; i += 1) {
+        if (this.routes[i].path === path) {
+          this.routes.slice(i, 1);
+          return this;
+        }
+      }
+      return this;
+    };
+  
+    flush = () => {
+      this.routes = [];
+      return this;
+    };
+  
+    clearSlashes = (path:any) =>
+      path
+        .toString()
+        .replace(/\/$/, '')
+        .replace(/^\//, '');
+  
+    getFragment = () => {
+      let fragment = '';
+      if (this.mode === 'history') {
+        fragment = this.clearSlashes(decodeURI(window.location.pathname + window.location.search));
+        fragment = fragment.replace(/\?(.*)$/, '');
+        fragment = this.root !== '/' ? fragment.replace(this.root, '') : fragment;
+      } else {
+        const match = window.location.href.match(/#(.*)$/);
+        fragment = match ? match[1] : '';
+      }
+      return this.clearSlashes(fragment);
+    };
+  
+    navigate = (path = '') => {
+      if (this.mode === 'history') {
+        window.history.pushState(null, 'null', this.root + this.clearSlashes(path));
+      } else {
+        window.location.href = `${window.location.href.replace(/#(.*)$/, '')}#${path}`;
+      }
+      return this;
+    };
+  
+    listen = () => {
+      clearInterval(this.interval);
+      this.interval = setInterval(this.interval, 50);
+    };
+  
+    interval = () => {
+      if (this.current === this.getFragment()) return;
+      this.current = this.getFragment();
+  
+      this.routes.some((route:any) => {
+        const match = this.current.match(route.path);
+        if (match) {
+          match.shift();
+          route.cb.apply({}, match);
+          return match;
+        }
+        return false;
+      });
+    };
+  }
+  
+  const router = new Router({
+    mode: 'hash',
+    root: '/'
+  });
+  
+  router
+    .add(/about/, () => {
+      alert('welcome in about page');
+    })
+    .add(/products\/(.*)\/specification\/(.*)/, (id:any, specification:any) => {
+      alert(`products: ${id} specification: ${specification}`);
+    })
+    .add('', () => {
+      // general controller
+      console.log('welcome in catch all controller');
+    });
+  
+
+
+///
 const arrayWithOrder: Array<number> = [];
 function getRandomOrder() {
     const globalArray: Array<IBasicNew> = [];
-    
+
     if (arrayWithOrder.length > 0) {
         arrayWithOrder.forEach(i => {
             if (basicCopy[i]) {
@@ -37,7 +164,7 @@ function getRandomOrder() {
     }
 
     for (let i = 0; i < basicCopy.length;) {
-        let random:number = Math.floor(Math.random() * (basicCopy.length - 1 + 1)) + 0;
+        let random: number = Math.floor(Math.random() * (basicCopy.length - 1 + 1)) + 0;
         if (!globalArray.includes(basicCopy[random])) {
             globalArray.push(basicCopy[random]);
             arrayWithOrder.push(random)
@@ -45,7 +172,7 @@ function getRandomOrder() {
         }
     }
     console.log(globalArray);
-   return globalArray;
+    return globalArray;
 
 
 }
@@ -97,7 +224,7 @@ function deleteBlocks(): void {
 
 function showBlocks(): void {
     const productBlocks: NodeListOf<Element> = document.querySelectorAll('.product__block');
-    if (productBlocks.length != 0 ) { deleteBlocks() };
+    if (productBlocks.length != 0) { deleteBlocks() };
     let arrey: Array<IBasicNew> = [];
     if (sortBlock?.value == 'sort-title') { arrey = getRandomOrder() };
     if (sortBlock?.value == 'price-ASC') { arrey = getSortByPriceASC() };
@@ -121,7 +248,7 @@ function resetBlock() {
     searchProduct();
     setInputRangeValue();
     setInputTextValue();
-    
+
 }
 buttonReset?.addEventListener('click', resetBlock);
 
@@ -195,9 +322,9 @@ function sortWishRangeline(array: Array<IBasicNew>) {
 function setQuery(nameObj: string, ...parameters: string[]) {
 
     const percentEncoding: string = setPercentEncoding(parameters.join('').split(''));
-    
+
     const allLinck = document.location.href.split('/')
-    const linkWebsite = allLinck[allLinck.length-1]
+    const linkWebsite = allLinck[allLinck.length - 1]
 
     const arrayWithlink = linkWebsite.split('&')
     // console.log(arrayWithlink);
@@ -214,8 +341,8 @@ function setQuery(nameObj: string, ...parameters: string[]) {
         if (percentEncoding.toString().length == 0) { return }
         let index: number
         arrayWithlink.forEach((element, i) => {
-          if (element.split('=')[0] + '=' == nameObj) {
-               index = i
+            if (element.split('=')[0] + '=' == nameObj) {
+                index = i
             }
         });
         arrayWithlink.splice(index!, 1);
@@ -232,33 +359,33 @@ function setQuery(nameObj: string, ...parameters: string[]) {
 }
 interface StringArray {
     [index: string]: string;
-  }
+}
 
 function loadQ() {
     console.log();
     let allLinck = document.location.href.split('/')
-    const linkWebsite = transformationLinck(allLinck[allLinck.length-1]);
+    const linkWebsite = transformationLinck(allLinck[allLinck.length - 1]);
     const arrayWithlink = linkWebsite.split('&');
-    const obj:StringArray = {};
-    
+    const obj: StringArray = {};
+
     function toObject(arrayWithlink: string[]) {
         for (let i = 0; i < arrayWithlink.length; ++i) {
             let key = arrayWithlink[i].split('=')[0];
             let value = arrayWithlink[i].split('=')[1];
             obj[key] = value;
-           }
+        }
     }
-   toObject(arrayWithlink)
-    if(Object.keys(obj).length <= 1){
-    searchProduct()
-    return
-   }
+    toObject(arrayWithlink)
+    if (Object.keys(obj).length <= 1) {
+        searchProduct()
+        return
+    }
     for (var key in obj) {
-        if (key == 'search'){
+        if (key == 'search') {
             searchBar!.value = `${obj[key]}`;
             searchProduct();
         }
-        if (key == 'range'){
+        if (key == 'range') {
             const rangeValue = obj[key].split(',');
             inputCostMin!.value = `${rangeValue[0]}`;
             inputCostMin!.textContent = `${rangeValue[0]}`;
@@ -272,7 +399,7 @@ function loadQ() {
             setInputRangeValue();
             setInputTextValue();
         }
-        if (key == 'sort'){
+        if (key == 'sort') {
             console.log(obj[key]);
             sortBlock!.value = `${obj[key]}`;
             showBlocks();
